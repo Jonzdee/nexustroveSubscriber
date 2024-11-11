@@ -1,0 +1,163 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexusTrove - Subscribe for Updates</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Starry background setup */
+    .starry-background {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Star field layers */
+    .starry-background::before, .starry-background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+      background-size: 10px 10px;
+      opacity: 0.5;
+      animation: star-animation 30s linear infinite;
+    }
+
+    .starry-background::after {
+      opacity: 0.3;
+      animation-duration: 60s;
+      transform: rotate(45deg);
+    }
+
+    /* Star movement animation */
+    @keyframes star-animation {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(-100px, -100px);
+      }
+    }
+      
+    /* Emoji Bounce Animation */
+    .emoji-indicator {
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Hero Section -->
+  <header class="bg-black text-white py-8 text-center relative starry-background">
+    <h1 class="text-5xl font-bold mb-4">Welcome to NexusTrove</h1>
+    <p class="text-lg">Stay updated with our latest insights, resources, and updates.</p>
+    <button onclick="openModal()" class="mt-6 px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition duration-300 relative">
+      <!-- Emoji Indicator -->
+      <div class="emoji-indicator">☝👆</div>
+      Subscribe Now
+    </button>
+  </header>
+
+  <!-- Image Banner -->
+  <section class="flex items-center justify-center py-8">
+    <img src="https://cdn.pixabay.com/photo/2022/07/21/07/33/subscribe-to-7335565_1280.jpg" alt="NexusTrove Banner" class="w-11/12 rounded-lg shadow-lg">
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-semibold mb-8">Why Join NexusTrove?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold text-black mb-4">Exclusive Content</h3>
+          <p class="text-gray-600">Receive insider insights and knowledge from industry experts.</p>
+        </div>
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold text-black mb-4">Community Engagement</h3>
+          <p class="text-gray-600">Connect with like-minded individuals and grow your network.</p>
+        </div>
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold text-black mb-4">Early Access</h3>
+          <p class="text-gray-600">Get the first look at new content, events, and resources.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Background -->
+  <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-10">
+    <!-- Modal Content -->
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
+      <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      <h2 class="text-2xl font-bold text-center mb-6">Subscribe to NexusTrove</h2>
+      <form id="contactForm" class="space-y-4">
+        <div>
+          <label class="block text-gray-700">Name</label>
+          <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded focus:outline-none" required>
+        </div>
+        <div>
+          <label class="block text-gray-700">Email</label>
+          <input type="email" id="email" class="w-full p-2 border border-gray-300 rounded focus:outline-none" required>
+        </div>
+        <button type="button" onclick="sendToWhatsApp()" class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="max-w-6xl mx-auto text-center">
+      <p>&copy; 2024 NexusTrove. All rights reserved.</p>
+      <p>Follow us on social media for more updates!</p>
+    </div>
+  </footer>
+
+  <script>
+    // Function to open the modal
+    function openModal() {
+      console.log("Button clicked"); // For debugging
+      document.getElementById("modalOverlay").classList.remove("hidden");
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById("modalOverlay").classList.add("hidden");
+    }
+
+    // Function to send the form data to WhatsApp
+    function sendToWhatsApp() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+
+      if (name && email) {
+        const message = `Name: ${encodeURIComponent(name)}, Email: ${encodeURIComponent(email)}`;
+        const whatsappURL = `https://wa.me/+2348063856166?text=${message}`;
+        window.open(whatsappURL, "_blank");
+        closeModal();  // Close modal after submission
+      } else {
+        alert("Please fill out all fields.");
+      }
+    }
+  </script>
+
+</body>
+</html>
