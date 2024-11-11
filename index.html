@@ -6,42 +6,7 @@
   <title>NexusTrove - Subscribe for Updates</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    /* Starry background setup */
-    .starry-background {
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Star field layers */
-    .starry-background::before, .starry-background::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
-      background-size: 10px 10px;
-      opacity: 0.5;
-      animation: star-animation 30s linear infinite;
-    }
-
-    .starry-background::after {
-      opacity: 0.3;
-      animation-duration: 60s;
-      transform: rotate(45deg);
-    }
-
-    /* Star movement animation */
-    @keyframes star-animation {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(-100px, -100px);
-      }
-    }
-      
+    
     /* Emoji Bounce Animation */
     .emoji-indicator {
       position: absolute;
@@ -64,17 +29,17 @@
 </head>
 <body class="bg-gray-100 font-sans">
 
-  <!-- Hero Section -->
-  <header class="bg-black text-white py-8 text-center relative starry-background">
+  
+ <!-- Hero Section -->
+ <header class="bg-black text-white py-8 text-center relative ">
     <h1 class="text-5xl font-bold mb-4">Welcome to NexusTrove</h1>
     <p class="text-lg">Stay updated with our latest insights, resources, and updates.</p>
-    <button onclick="openModal()" class="mt-6 px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition duration-300 relative">
+    <button onclick="openModal()" class="mt-6 px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition duration-300 relative">
+      Subscribe Now
       <!-- Emoji Indicator -->
       <div class="emoji-indicator">☝👆</div>
-      Subscribe Now
     </button>
   </header>
-
   <!-- Image Banner -->
   <section class="flex items-center justify-center py-8">
     <img src="https://cdn.pixabay.com/photo/2022/07/21/07/33/subscribe-to-7335565_1280.jpg" alt="NexusTrove Banner" class="w-11/12 rounded-lg shadow-lg">
@@ -134,7 +99,6 @@
   <script>
     // Function to open the modal
     function openModal() {
-      console.log("Button clicked"); // For debugging
       document.getElementById("modalOverlay").classList.remove("hidden");
     }
 
@@ -150,7 +114,7 @@
 
       if (name && email) {
         const message = `Name: ${encodeURIComponent(name)}, Email: ${encodeURIComponent(email)}`;
-        const whatsappURL = `https://wa.me/+2348063856166?text=${message}`;
+        const whatsappURL = `https://wa.me/<YourPhoneNumber>?text=${message}`;
         window.open(whatsappURL, "_blank");
         closeModal();  // Close modal after submission
       } else {
